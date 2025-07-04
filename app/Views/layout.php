@@ -15,13 +15,22 @@ if (uri_string() != "") {
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <!-- Favicons -->
     <link href="<?php echo base_url() ?>NiceAdmin/assets/img/favicon.png" rel="icon">
     <link href="<?php echo base_url() ?>NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="<?php echo base_url() ?>NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,6 +43,8 @@ if (uri_string() != "") {
 
     <!-- Template Main CSS File -->
     <link href="<?php echo base_url() ?>NiceAdmin/assets/css/style.css" rel="stylesheet">
+
+    <?= $this->renderSection('script') ?>
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -59,9 +70,9 @@ if (uri_string() != "") {
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <?php
                     if ($hlm != "Home") {
-                    ?>
+                        ?>
                         <li class="breadcrumb-item"><?php echo $hlm ?></li>
-                    <?php
+                        <?php
                     }
                     ?>
                 </ol>
@@ -87,7 +98,8 @@ if (uri_string() != "") {
 
     <?= $this->include('components/footer') ?>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="<?php echo base_url() ?>NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
