@@ -38,26 +38,34 @@ class ApiController extends ResourceController
 
         $headers = $this->request->headers();
 
-        array_walk($headers, function (&$value, $key) {
-            $value = $value->getValue();
-        });
+        // Cek API Key
+        foreach ($headers as $key => $val) {
+            if (strtolower($key) === 'key' && $val->getValue() == $this->apiKey) {
+                $transactions = $this->transaction->findAll();
 
-        if (array_key_exists("Key", $headers)) {
-            if ($headers["Key"] == $this->apiKey) {
-                $penjualan = $this->transaction->findAll();
+                foreach ($transactions as $trx) {
+                    $details = $this->transaction_detail
+                        ->where('transaction_id', $trx['id'])
+                        ->findAll();
 
-                foreach ($penjualan as &$pj) {
-                    $pj['details'] = $this->transaction_detail->where('transaction_id', $pj['id'])->findAll();
+                    $totalItem = 0;
+                    foreach ($details as $d) {
+                        $totalItem += $d['jumlah'];
+                    }
+
+                    $trx['item_count'] = $totalItem;
+
+                    $data['results'][] = $trx;
                 }
 
-                $data['status'] = ["code" => 200, "description" => "OK"];
-                $data['results'] = $penjualan;
-
+                $data['status'] = ["code" => 200, "description" => "Success"];
+                break;
             }
         }
 
-        return $this->respond($data);
+        return $this->respond($data, $data['status']['code']);
     }
+
 
     /**
      * Return the properties of a resource object.

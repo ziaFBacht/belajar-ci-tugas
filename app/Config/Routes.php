@@ -35,6 +35,15 @@ $routes->group('produk_kategori', ['filter' => 'auth'], function ($routes) {
     $routes->get('delete/(:any)', 'KategoriController::delete/$1');
 });
 
+$routes->group('diskon', ['filter' => 'auth'], function ($routes) {
+    $routes->get('', 'DiskonController::index');
+    $routes->post('', 'DiskonController::create');
+    $routes->post('edit/(:any)', 'DiskonController::edit/$1');
+    $routes->get('delete/(:any)', 'DiskonController::delete/$1');
+    $routes->get('cek-diskon', 'DiskonController::cekDiskonHariIni');
+});
+
+
 $routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']);
 $routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']);
 

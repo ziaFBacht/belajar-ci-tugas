@@ -11,12 +11,14 @@ class DiscountSeeder extends Seeder
         $db = \Config\Database::connect();
         $builder = $db->table('diskon');
 
-        $tanggal_awal = '2025-06-25';
+        // Ambil tanggal hari ini
+        $today = date('Y-m-d');
         $now = date('Y-m-d H:i:s');
 
+        // Tambahkan 10 data mulai dari hari ini
         for ($i = 0; $i < 10; $i++) {
-            $tanggal = date('Y-m-d', strtotime("$tanggal_awal +$i days"));
-            $nominal = 100000 + ($i * 10000); // Tambah variasi nominal
+            $tanggal = date('Y-m-d', strtotime("$today +$i days"));
+            $nominal = 100000 + ($i * 10000); // Nominal bertambah
 
             $builder->insert([
                 'tanggal' => $tanggal,

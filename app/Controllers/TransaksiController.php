@@ -33,10 +33,16 @@ class TransaksiController extends BaseController
 
     public function cart_add()
     {
+        $harga = $this->request->getPost('harga');
+        $diskon = session()->get('diskon_nominal') ?? 0;
+
+        $hargaDiskon = max(0, $harga - $diskon);
+
+        // Masukkan ke keranjang
         $this->cart->insert(array(
             'id' => $this->request->getPost('id'),
             'qty' => 1,
-            'price' => $this->request->getPost('harga'),
+            'price' => $hargaDiskon,
             'name' => $this->request->getPost('nama'),
             'options' => array('foto' => $this->request->getPost('foto'))
         ));
